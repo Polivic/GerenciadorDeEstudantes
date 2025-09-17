@@ -1,17 +1,18 @@
 const readline = require('readline-sync');
 
-let estudantes = [];
+let estudantes = []; // Array para armazenar os estudantes
 
-
+// Valida se todas as notas estão entre 0 e 10
 function validarNotas(notas) {
     return notas.every((nota) => !isNaN(nota) && nota >= 0 && nota <= 10);
 }
 
+// Busca um estudante pelo nome (case insensitive)
 function buscarEstudantePorNome(nome) {
     return estudantes.find((estudante) => estudante.nome.toLowerCase() === nome.toLowerCase());
 }
 
-
+// Cadastra um novo estudante no array
 function cadastrarEstudante() {
     const nome = readline.question("Nome do estudante: ").trim();
     if (!nome) {
@@ -25,6 +26,7 @@ function cadastrarEstudante() {
         return;
     }
 
+    // Recebe as notas separadas por vírgula e converte para float
     let notas = readline
         .question("Digite as notas separadas por vírgula: ")
         .split(",")
@@ -39,6 +41,7 @@ function cadastrarEstudante() {
     console.log("Estudante cadastrado com sucesso!");
 }
 
+// Remove um estudante pelo nome
 function removerEstudante(nome) {
     const antes = estudantes.length;
     estudantes = estudantes.filter(
@@ -51,6 +54,7 @@ function removerEstudante(nome) {
     }
 }
 
+// Atualiza as notas de um estudante
 function atualizarNotas(nomeDoEstudante) {
     let estudante = buscarEstudantePorNome(nomeDoEstudante);
     if (estudante) {
@@ -70,28 +74,29 @@ function atualizarNotas(nomeDoEstudante) {
     }
 }
 
-
+// Calcula a média das notas de um estudante
 function calcularMedia(notas) { 
     let soma = notas.reduce((acumulador, nota) => acumulador + nota, 0); 
     return soma / notas.length;
 }
 
+// Calcula a média da turma
 function calcularMediaTurma(estudantes) { 
     let somaMedias = estudantes.reduce((acumulador, estudante) => acumulador + calcularMedia(estudante.notas), 0); 
     return somaMedias / estudantes.length; 
 }
 
+// Calcula a média individual de um estudante pelo nome
 function calcularMediaIndividual(nome) { 
     let estudante = buscarEstudantePorNome(nome); 
     if (estudante) { 
         return calcularMedia(estudante.notas); 
-
     } else { 
         return null; 
     } 
 }
 
-
+// Exibe todos os estudantes cadastrados com suas médias
 function exibirEstudantes() {
     if (estudantes.length === 0) {
         console.log("\nNenhum estudante cadastrado.");
@@ -108,6 +113,7 @@ function exibirEstudantes() {
     });
 }
 
+// Exibe a média geral da turma
 function exibirMediaTurma() {
     if (estudantes.length === 0) {
         console.log("\nNenhum estudante cadastrado.");
@@ -117,6 +123,7 @@ function exibirMediaTurma() {
     console.log(`\nMédia da Turma: ${mediaTurma.toFixed(2)}`);
 }
 
+// Exibe a média individual de um estudante
 function exibirMediaIndividual(nome) {
     let media = calcularMediaIndividual(nome);
     if (media !== null) {
@@ -126,6 +133,7 @@ function exibirMediaIndividual(nome) {
     }
 }
 
+// Busca estudantes pelo nome ou parte do nome
 function buscarEstudante() {
     const termo = readline.question("Digite o nome ou parte do nome: ").toLowerCase();
     const resultados = estudantes.filter((estudante) =>
@@ -144,6 +152,7 @@ function buscarEstudante() {
     });
 }
 
+// Lista estudantes por situação: aprovado, recuperação ou reprovado
 function listarEstudantes() {
     if (estudantes.length === 0) {
         console.log("\nNenhum estudante cadastrado.");
@@ -172,8 +181,7 @@ function listarEstudantes() {
         );
 }
 
-
-
+// Encontra e exibe o estudante com maior média
 function estudanteComMaiorMedia() {
     if (estudantes.length === 0) {
         console.log("Nenhum estudante cadastrado.");
@@ -193,7 +201,7 @@ function estudanteComMaiorMedia() {
     return melhorEstudante;
 }
 
-
+// Encontra e exibe o estudante com menor média
 function estudanteComMenorMedia() {
     if (estudantes.length === 0) {
         console.log("Nenhum estudante cadastrado.");
@@ -213,8 +221,7 @@ function estudanteComMenorMedia() {
     return piorEstudante;
 }
 
-
-
+// Menu principal do sistema
 function menu() {
     let opcao;
     do {
