@@ -1,0 +1,23 @@
+{
+  "name": "gerenciadordeestudantes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Polivic/GerenciadorDeEstudantes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Polivic/GerenciadorDeEstudantes/issues"
+  },
+  "homepage": "https://github.com/Polivic/GerenciadorDeEstudantes#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
